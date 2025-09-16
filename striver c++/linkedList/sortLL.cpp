@@ -44,6 +44,40 @@ void traverse(Node* head){
     }
     cout<<endl;
 }
+Node* reverse(Node* head) {
+    Node* prev = NULL;
+    Node* curr = head;
+    while(curr != NULL) {
+        Node* nextNode = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = nextNode;
+    }
+    return prev;
+}
+Node* add1(Node* head){
+    Node* temp=head;
+    int carry=1;
+    while(temp!=NULL){
+        temp->data=temp->data+carry;
+        if(temp->data < 10){
+            carry=0;
+            break;
+        }
+        else{
+            temp->data=0;
+            carry=1;
+        }
+        temp=temp->next;
+    }
+    if(carry==1){
+        Node* newnode=new Node(1);
+        newnode->next=head;
+        return newnode;
+    }
+    reverse(head);
+    return head;
+}
 int main(){
     vector<int> arr={6,4,7,8,2,9,1};
     Node* head=convertll(arr);
@@ -51,6 +85,10 @@ int main(){
     cout<<endl;
     cout<<"sorting the SLL"<<endl;
     sortll(head);
+    traverse(head);
+    cout<<endl;
+    cout<<"adding 1 into the linked list"<<endl;
+    add1(head);
     traverse(head);
     return 0;
 }

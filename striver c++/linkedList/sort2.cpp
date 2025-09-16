@@ -42,6 +42,7 @@ Node* sortll(Node* head){
         temp->data=2;
         count2--;
     }
+    temp=temp->next;
    }
    return head;
 }
