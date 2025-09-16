@@ -55,27 +55,30 @@ Node* reverse(Node* head) {
     }
     return prev;
 }
-Node* add1(Node* head){
-    Node* temp=head;
-    int carry=1;
-    while(temp!=NULL){
-        temp->data=temp->data+carry;
-        if(temp->data < 10){
-            carry=0;
+Node* add1(Node* head) {
+    if(head==NULL || head->next==NULL) return head;
+    head = reverse(head);
+    Node* temp = head;
+    int carry = 1;
+
+    while(temp != NULL) {
+        temp->data += carry;
+        if(temp->data < 10) {
+            carry = 0;
             break;
+        } else {
+            temp->data = 0;
+            carry = 1;
         }
-        else{
-            temp->data=0;
-            carry=1;
-        }
-        temp=temp->next;
+        temp = temp->next;
     }
-    if(carry==1){
-        Node* newnode=new Node(1);
-        newnode->next=head;
-        return newnode;
+    if(carry == 1) {
+        Node* newnode = new Node(1);
+        head=reverse(head);
+        newnode->next = head;
+        head = newnode;
     }
-    reverse(head);
+    head = reverse(head);
     return head;
 }
 int main(){
