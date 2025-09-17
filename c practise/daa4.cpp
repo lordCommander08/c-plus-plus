@@ -1,36 +1,67 @@
 #include <stdio.h>
 
-void selectionSort(int arr[], int n) {
-    for (int i = 0; i < n - 1; i++) {
-        int minIndex = i;
-        // Find the index of the smallest element in unsorted part
-        for (int j = i + 1; j < n; j++) {
-            if (arr[j] < arr[minIndex]) {
-                minIndex = j;
-            }
+void merge(int arr[],int l,int m,int r){
+    int n1=m-l+1;
+    int n2=r-m;
+    int L[n1],R[n2];
+    for(int i=0;i<n1;i++)L[i]=arr[l+i];
+    for(int j=0;j<n2;j++)R[j]=arr[m+1+j];
+    int i=0,j=0,k=l;
+    while(i<n1 && j<n2){
+        if(L[i]<=R[j]){
+            arr[k]=L[i];
+            i++;
+        }else{
+            arr[k]=R[j];
+            j++;
         }
-        // Swap the found minimum with the first unsorted element
-        int temp = arr[minIndex];
-        arr[minIndex] = arr[i];
-        arr[i] = temp;
+        k++;
+    }
+    while(i<n1){
+        arr[k]=L[i];
+        i++;
+        k++;
+    }
+    while(j<n2){
+        arr[k]=R[j];
+        j++;
+        k++;
     }
 }
 
-int main() {
-    printf("Name-Darpan Pawar\nnRoll No. – 2301920100111\n");
-    int n;
-    printf("Enter number of elements: ");
-    scanf("%d", &n);
-    int arr[n];
-    printf("Enter %d elements:\n", n);
-    for (int i = 0; i < n; i++) {
-        scanf("%d", &arr[i]);
+void mergeSort(int arr[],int l,int r){
+    if(l<r){
+        int m=l+(r-l)/2;
+        mergeSort(arr,l,m);
+        mergeSort(arr,m+1,r);
+        merge(arr,l,m,r);
     }
-    selectionSort(arr, n);
-    printf("Sorted Array:\n");
-    for (int i = 0; i < n; i++) {
-        printf("%d ", arr[i]);
-    }
+}
+
+void printArray(int arr[],int n){
+    for(int i=0;i<n;i++)printf("%d ",arr[i]);
     printf("\n");
+}
+
+int main(){
+    printf("Name : Chirag \n");
+    printf("Roll No: 2301920100110\n\n");
+
+    int n;
+    printf("Enter size of array: ");
+    scanf("%d",&n);
+
+    int arr[n];
+    printf("Enter %d elements: ",n);
+    for(int i=0;i<n;i++)scanf("%d",&arr[i]);
+
+    printf("Original array:\n");
+    printArray(arr,n);
+
+    mergeSort(arr,0,n-1);
+
+    printf("Sorted array by Merge Sort:\n");
+    printArray(arr,n);
+
     return 0;
 }

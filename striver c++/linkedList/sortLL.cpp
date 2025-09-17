@@ -84,7 +84,7 @@ Node* add1(Node* head) {
 }
 
 int main() {
-    vector<int> arr = {6, 4, 7, 8, 2, 9, 1};
+    vector<int> arr = {9,9,9};
     Node* head = convertll(arr);
 
     cout << "Original list: ";

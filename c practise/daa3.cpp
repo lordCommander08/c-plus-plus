@@ -1,33 +1,56 @@
 #include <stdio.h>
-int binarySearch(int arr[], int n, int key) {
-    int low = 0, high = n - 1;
-    while (low <= high) {
-        int mid = low + (high - low) / 2;
-        if (arr[mid] == key) {
-            return mid;
+
+void swap(int *a,int *b){
+    int t=*a;
+    *a=*b;
+    *b=t;
+}
+
+int partition(int arr[],int low,int high){
+    int pivot=arr[high];
+    int i=low-1;
+    for(int j=low;j<high;j++){
+        if(arr[j]<=pivot){
+            i++;
+            swap(&arr[i],&arr[j]);
         }
-        else if (arr[mid] > key) {
-            high = mid - 1;}
-        else {
-            low = mid + 1;}}
-    return -1;}
-int main() {
-    printf("Name – Anurag Rathi\nRoll No. - 2301920100067\n");
-    int n, key;
-    printf("Enter number of elements: ");
-    scanf("%d", &n);
+    }
+    swap(&arr[i+1],&arr[high]);
+    return i+1;
+}
+
+void quickSort(int arr[],int low,int high){
+    if(low<high){
+        int pi=partition(arr,low,high);
+        quickSort(arr,low,pi-1);
+        quickSort(arr,pi+1,high);
+    }
+}
+
+void printArray(int arr[],int n){
+    for(int i=0;i<n;i++)printf("%d ",arr[i]);
+    printf("\n");
+}
+
+int main(){
+    printf("Name: Chirag\n");
+    printf("Roll No: 2301920100110\n\n");
+
+    int n;
+    printf("Enter size of array: ");
+    scanf("%d",&n);
+
     int arr[n];
-    printf("Enter %d elements in sorted order:\n", n);
-    for (int i = 0; i < n; i++) {
-        scanf("%d", &arr[i]);
-    }
-    printf("Enter element to search: ");
-    scanf("%d", &key);
-    int result = binarySearch(arr, n, key);
-    if (result == -1) {
-        printf("Element not found!\n");
-    } else {
-        printf("Element found at index: %d\n", result);
-    }
+    printf("Enter %d elements: ",n);
+    for(int i=0;i<n;i++)scanf("%d",&arr[i]);
+
+    printf("Original array:\n");
+    printArray(arr,n);
+
+    quickSort(arr,0,n-1);
+
+    printf("Sorted array by Quick Sort:\n");
+    printArray(arr,n);
+
     return 0;
 }
