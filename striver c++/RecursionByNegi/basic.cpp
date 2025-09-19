@@ -47,22 +47,36 @@
 // //     cout<<"pow of a"<<endl;
 // //     cout<<pow(2,7 );
 // // }
+// #include<bits/stdc++.h>
+// using namespace std;
+// int fibseries(int n){
+//     if(n==0){
+//         return 0;
+//     }
+//     if(n==1){
+//         return 1;
+//     }
+//     return fibseries(n-1)+fibseries(n-2);
+// }
+// int main(){
+//     cout<<"enter the number of which u want to find the factorial"<<endl;
+//     int n;
+//     cin>>n;
+//     int a=fibseries(n);
+//     cout<<a;
+//     return 0;
+// }
 #include<bits/stdc++.h>
 using namespace std;
-int fibseries(int n){
-    if(n==0){
-        return 0;
+void  sumofarray(int arr[],int index,int n,int sum){
+    if(index==n){
+        cout<<sum;
+        return;
     }
-    if(n==1){
-        return 1;
-    }
-    return fibseries(n-1)+fibseries(n-2);
+    sumofarray(arr,index+1,n,sum+arr[index]);
 }
 int main(){
-    cout<<"enter the number of which u want to find the factorial"<<endl;
-    int n;
-    cin>>n;
-    int a=fibseries(n);
-    cout<<a;
-    return 0;
+    int arr[5]={1,2,3,4,5};
+    sumofarray(arr,0,5,0);
+    return 0; 
 }
