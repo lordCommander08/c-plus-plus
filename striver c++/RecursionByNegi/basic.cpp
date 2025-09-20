@@ -66,17 +66,31 @@
 //     cout<<a;
 //     return 0;
 // }
+// #include<bits/stdc++.h>
+// using namespace std;
+// int minofarray(int arr[],int n){
+//     if(n==1){
+//         return arr[0];
+//     }
+//     return min(arr[n-1],minofarray(arr,n-1));
+// }
+// int main(){
+//     int arr[5]={190,23,31,42,53};
+//     cout<<minofarray(arr,5);
+//     return 0; 
+// }
 #include<bits/stdc++.h>
 using namespace std;
-void  sumofarray(int arr[],int index,int n,int sum){
-    if(index==n){
-        cout<<sum;
+void rev(string &str,int start,int end){
+    if(start>=end){
         return;
     }
-    sumofarray(arr,index+1,n,sum+arr[index]);
+    swap(str[start],str[end]);
+    rev(str,start+1,end-1);
 }
 int main(){
-    int arr[5]={1,2,3,4,5};
-    sumofarray(arr,0,5,0);
-    return 0; 
+    string s="Deependra";
+    rev(s,0,s.size()-1);
+    cout<<s;
+    return 0;
 }
