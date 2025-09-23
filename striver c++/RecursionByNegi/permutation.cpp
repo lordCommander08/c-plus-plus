@@ -45,7 +45,7 @@ void permutation(vector<int> &arr,int n,int index,vector<vector<int>> &ans){
     }
 }
 int main(){
-    vector<int> arr={2,3,4};
+    vector<int> arr={3,3,4};
     vector<vector<int>> ans;
     permutation(arr,arr.size(),0,ans);
    for(int i=0;i<ans.size();i++){  
