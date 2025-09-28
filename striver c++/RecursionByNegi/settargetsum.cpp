@@ -14,11 +14,11 @@ void settargetsum(vector<int> &nums,set<vector<int>> &ans,vector<int> &temp,int 
 }
 int main(){
 
-    vector<int> nums={3,4,7};
+    vector<int> nums={2,5,2,1,2};
     int n=nums.size();
     set<vector<int>> ans;
     vector<int> temp;
-    settargetsum(nums,ans,temp,0,n,0,7);
+    settargetsum(nums,ans,temp,0,n,0,5);
     for(auto &x:ans){
         for(auto y:x){
             cout<<y<<" ";
