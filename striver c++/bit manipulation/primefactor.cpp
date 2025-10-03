@@ -24,19 +24,39 @@ using namespace std;
 //     }
 //     return 0;
 // }
+// int main(){
+//     cout<<"enter a number = ";
+//     int n;
+//     cin>>n;
+//     vector<int> ans;
+//     for(int i=2;i<=sqrt(n);i++){
+//         if(n%i==0) ans.push_back(i);
+//         while(n%i==0){
+//             n=n/i;
+//         }
+//     }
+//     if(n!=1) ans.push_back(n);
+//     for(auto it: ans){
+//         cout<<it<<" ";
+//     }
+//     return 0;
+// }
+// store all the duplicate prime factors of a number
 int main(){
-    cout<<"enter a number = ";
-    int n;
-    cin>>n;
     vector<int> ans;
-    for(int i=2;i<=sqrt(n);i++){
-        if(n%i==0) ans.push_back(i);
-        while(n%i==0){
-            n=n/i;
+    int n;
+    cout<<"enter a number = ";
+    cin>>n;
+    for(int i=2;i*i<n;i++){
+        if(n%i==0){
+            while(n%i==0){
+                ans.push_back(i);
+                n=n/i;
+            }
         }
     }
     if(n!=1) ans.push_back(n);
-    for(auto it: ans){
+    for(auto it:ans){
         cout<<it<<" ";
     }
     return 0;
