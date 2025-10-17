@@ -2,16 +2,16 @@
 using namespace std;
 vector<int> findnextmin(vector<int> &arr){
     int n = arr.size();
-    vector<int> left(n),right(n);
-    left[0]=arr[0];
-    for(int i=1;i<n;i++){
-        left[i]=min(left[i-1],arr[i]);
+    vector<int> nse(n,-1);
+    stack<int> st;
+    for(int i=n-1;i>=0;i--){
+        while(!st.empty() && st.top()>=arr[i]){
+            st.pop();
+        }
+        nse[i]=st.empty() ? -1 : st.top();
+        st.push(arr[i]);
     }
-    right[n-1]=arr[n-1];
-    for(int i=n-2;i>=0;i--){
-        right[i]=min(right[i+1],arr[i]);
-    }
-    return left,right;
+    return nse;
 }
 int main(){
     vector<int> arr={3,6,3,2,1,7,9};
