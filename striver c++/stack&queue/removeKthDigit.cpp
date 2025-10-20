@@ -37,7 +37,7 @@ string removeKthDigit(string num, int k) {
 }
 
 int main() {
-    string s = "10200";
-    int k = 1;
+    string s = "42136";
+    int k = 2;
     cout << removeKthDigit(s, k);
 }
