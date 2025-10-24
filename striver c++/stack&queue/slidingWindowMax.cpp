@@ -3,12 +3,22 @@ using namespace std;
 vector<int> WindowMax(vector<int> &arr,int k){
     int n = arr.size();
     vector<int> result;
-    for(int i=0;i<=n-k;i++){
-        int maxi=arr[i];
-        for(int j=i;j<i+k;j++){
-            maxi=max(maxi,arr[j]);
+    deque<int> dq;
+    for(int i=0;i<n;i++){
+        // Remove elements out of the current window
+        if(!dq.empty() && dq.front() == i - k){
+            dq.pop_front();
         }
-        result.push_back(maxi);
+        // Remove elements smaller than the current element from the back of the deque
+        while(!dq.empty() && arr[dq.back()] < arr[i]){
+            dq.pop_back();
+        }
+        // Add the current element index to the deque
+        dq.push_back(i);
+        // If we have processed at least k elements, add the maximum to the result
+        if(i >= k - 1){
+            result.push_back(arr[dq.front()]);
+        }
     }
     return result;
 }
