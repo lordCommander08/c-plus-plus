@@ -21,7 +21,8 @@ vector<int> WindowMax(vector<int> &arr,int k){
         }
     }
     return result;
-}
+}3.
+
 int main()
 {
     int k=3;
