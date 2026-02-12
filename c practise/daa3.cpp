@@ -1,56 +1,67 @@
 #include <stdio.h>
 
-void swap(int *a,int *b){
-    int t=*a;
-    *a=*b;
-    *b=t;
-}
+struct Item {
+    int weight;
+    int value;
+};
 
-int partition(int arr[],int low,int high){
-    int pivot=arr[high];
-    int i=low-1;
-    for(int j=low;j<high;j++){
-        if(arr[j]<=pivot){
-            i++;
-            swap(&arr[i],&arr[j]);
+void knapsack(struct Item items[], int n, int W) {
+    double ratio[n];
+
+    for (int i = 0; i < n; i++) {
+        ratio[i] = (double)items[i].value / items[i].weight;
+    }
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (ratio[i] < ratio[j]) {
+                double tempR = ratio[i];
+                ratio[i] = ratio[j];
+                ratio[j] = tempR;
+
+                struct Item temp = items[i];
+                items[i] = items[j];
+                items[j] = temp;
+            }
         }
     }
-    swap(&arr[i+1],&arr[high]);
-    return i+1;
-}
 
-void quickSort(int arr[],int low,int high){
-    if(low<high){
-        int pi=partition(arr,low,high);
-        quickSort(arr,low,pi-1);
-        quickSort(arr,pi+1,high);
+    double totalValue = 0.0;
+    int currentWeight = 0;
+
+    for (int i = 0; i < n; i++) {
+        if (currentWeight + items[i].weight <= W) {
+            currentWeight += items[i].weight;
+            totalValue += items[i].value;
+        } else {
+            int remain = W - currentWeight;
+            totalValue += items[i].value * ((double)remain / items[i].weight);
+            break;
+        }
     }
+
+    printf("Maximum value in Knapsack = %.2f\n", totalValue);
 }
 
-void printArray(int arr[],int n){
-    for(int i=0;i<n;i++)printf("%d ",arr[i]);
-    printf("\n");
-}
+int main() {
+    printf("Name: Bhavana\n");
+    printf("Roll No: 2301920100105\n");
 
-int main(){
-    printf("Name: Chirag\n");
-    printf("Roll No: 2301920100110\n\n");
+    int n, W;
+    printf("Enter number of items: ");
+    scanf("%d", &n);
 
-    int n;
-    printf("Enter size of array: ");
-    scanf("%d",&n);
+    struct Item items[n];
 
-    int arr[n];
-    printf("Enter %d elements: ",n);
-    for(int i=0;i<n;i++)scanf("%d",&arr[i]);
+    printf("Enter weight and value of each item:\n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d %d", &items[i].weight, &items[i].value);
+    }
 
-    printf("Original array:\n");
-    printArray(arr,n);
+    printf("Enter capacity of knapsack: ");
+    scanf("%d", &W);
 
-    quickSort(arr,0,n-1);
-
-    printf("Sorted array by Quick Sort:\n");
-    printArray(arr,n);
+    knapsack(items, n, W);
 
     return 0;
 }
