@@ -43,6 +43,16 @@ vector<int> bfsG(int v,vector<vector<int>>& adj){
     }
     return bfs;
 }
+vector<int> dfsG(int node,vector<vector<int>>& adj,vector<int>& vis,vector<int>& dfs){
+    vis[node]=1;
+    dfs.push_back(node);
+    for(auto it: adj[node]){
+        if(!vis[it]){
+            dfsG(it,adj,vis,dfs);
+        }
+    }
+    return dfs;
+}
 int main(){
     int n,m;
     cout<<"enter the number of vertices = ";
@@ -61,6 +71,14 @@ int main(){
     cout << "BFS Traversal: ";
     for(int node : result){
         cout << node << " ";
+    }
+    cout<<endl;
+    cout<<"DFS Traversal : ";
+    vector<int> dfs;
+    vector<int> vis(n,0);
+    dfsG(0,g.adj,vis,dfs);
+    for(int x : dfs){
+        cout<<x<<" ";
     }
     return 0;
 }
