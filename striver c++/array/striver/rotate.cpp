@@ -32,6 +32,10 @@ int main(){
     reverse(nums,0,n-k-1);
     reverse(nums,n-k,n-1);
     reverse(nums,0,n-1);
+    // for left rotate;
+    // reverse(nums,0,k-1);
+    // reverse(nums,k,n-1);
+    // reverse(nums,0,n-1);
     cout<<"right rotate by k ";
     for(auto &it:nums){
         cout<<it<<" ";
