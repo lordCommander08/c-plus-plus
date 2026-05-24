@@ -19,10 +19,11 @@ int main(){
 //     cout<<endl<<slargest;
 //     return 0;
  // optimal solution
- int arr[5]={44,22,31,46,78};
+ int arr[]={44,22,31,46,78};
+ int n = sizeof(arr)/sizeof(int);
  int largest=arr[0];
  int slargest=-1;
- for(int i=0;i<5;i++){
+ for(int i=0;i<n;i++){
     if(arr[i]>largest){
         slargest=largest;
         largest=arr[i];
