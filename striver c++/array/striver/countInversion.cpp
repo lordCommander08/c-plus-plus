@@ -1,14 +1,38 @@
 #include<bits/stdc++.h>
 using namespace std;
-int main(){
-    vector<int> nums={5,3,2,4,1};
-    int n = nums.size();
-    int count=0;
-    for(int i=0;i<n;i++){
-        for(int j=i+1;j<n;j++){
-            if(nums[i]>nums[j]) count++;
+long long mergeArray(vector<int>& arr,int low,int mid,int high){
+    vector<int> temp;
+    int left=low,right=mid+1;
+    long long cnt=0;
+    while(left<=mid && right<=high){
+        if(arr[left]<=arr[right]){
+            temp.push_back(arr[left++]);
+        }
+        else{
+            temp.push_back(arr[right++]);
+            cnt+=(mid-left+1);
         }
     }
-    cout<<"No. of inversions = "<<count;
+    while(left<=mid) temp.push_back(arr[left++]);
+    while(right<=high) temp.push_back(arr[right++]);
+
+    for(int i=low;i<=high;i++){
+        arr[i]=temp[i-low];
+    }
+    return cnt;
+}
+
+long long mergeSort(vector<int>& arr,int low,int high){
+    if(low>=high) return 0;
+    int mid=low+(high-low)/2;
+    long long cnt=0;
+    cnt+=mergeSort(arr,low,mid);
+    cnt+=mergeSort(arr,mid+1,high);
+    cnt+=mergeArray(arr,low,mid,high);
+    return cnt;
+}
+int main(){
+    vector<int> nums={5,3,2,4,1};
+    cout<<mergeSort(nums,0,nums.size()-1);
     return 0;
 }
